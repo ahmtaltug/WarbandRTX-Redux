@@ -17,8 +17,7 @@ Nexus Mods: https://www.nexusmods.com/mbwarband/mods/6722
 `rgl_config.txt` switches Warband to the DirectX 7 renderer
 (`use_pixel_shaders = 0`, `use_vertex_shaders = 0`), which RTX Remix needs.
 
-The option names target RTX Remix 1.5.x. `rtx.rayreconstruction.model` was
-removed in Remix 1.6, which ignores it.
+Targets RTX Remix 1.6.1. Also works with 1.5.x.
 
 ## How RTX Remix presets interact with this file
 
@@ -34,14 +33,17 @@ layer that takes priority over `rtx.conf`, so values for them in `rtx.conf` are 
 - `rtx.di.enableRayTracedBiasCorrection`, `rtx.restirGI.biasCorrectionMode`,
   `rtx.restirGI.useReflectionReprojection`
 - `rtx.enableStochasticAlphaBlend`, `rtx.postfx.enable`
-- `rtx.rayreconstruction.model` (Ultra/High use Transformer; Medium/Low use CNN)
-- volumetrics quality, NEE cache, and the NRC quality preset
+- volumetrics quality, NEE cache, and the radiance cache (SHaRC/NRC) quality preset
+- sparse rendering settings and, on Medium/Low, `rtx.dlfg.litePreset`
 
 To make your own values for these options take effect, set `rtx.graphicsPreset = 4` (Custom).
 
-The presets above keep this mod's intended ray reconstruction model for each tier:
-Transformer on the high-end tier and CNN everywhere else. RTX 4090 and 5090
-owners can try `rtx.graphicsPreset = 0` (Ultra).
+RTX 4090 and 5090 owners can try `rtx.graphicsPreset = 0` (Ultra).
+
+Remix 1.6 notes:
+- Ray reconstruction always uses the Transformer model. The CNN option is gone.
+- The default indirect lighting cache is SHaRC (`rtx.integrateIndirectMode = 3`).
+  The `rtx.neuralRadianceCache.*` options only apply if NRC is selected.
 
 Settings that players change in the Remix menu (Alt+X) are saved to `user.conf`.
 `user.conf` overrides both the preset and `rtx.conf`. If a player says an update
@@ -49,7 +51,12 @@ had no effect, have them delete `user.conf`.
 
 ## Changelog
 
-### Unreleased
+### 0.1.2 Beta
+- Updated for RTX Remix 1.6.1: removed `rtx.rayreconstruction.model`, which
+  Remix 1.6 no longer has. Remix 1.5.x users see no change, because there the
+  graphics preset already chose the model.
+
+### 0.1.1 Beta
 - Fixed reversed `rtx.graphicsPreset` values. In 0.1, the RTX 40/50 tiers loaded
   **Low** and Intel/AMD loaded **High**. New values: high-end tier = High,
   RTX 20/30/40/50 = Medium, Intel/AMD = Low.
