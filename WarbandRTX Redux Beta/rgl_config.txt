@@ -26,7 +26,7 @@ disable_sound = 0
 
 disable_frequency_variation = 0
 
-cheat_mode = 1
+cheat_mode = 0
 
 enable_blood = 1
 
@@ -83,8 +83,6 @@ invert_mouse = 0
 enable_lighting = 1
 
 enable_particles = 0
-
-enable_blood = 1
 
 enable_character_shadows = 0
 
