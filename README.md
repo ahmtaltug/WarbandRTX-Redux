@@ -47,19 +47,6 @@ Settings that players change in the Remix menu (Alt+X) are saved to `user.conf`.
 `user.conf` overrides both the preset and `rtx.conf`. If a player says an update
 had no effect, have them delete `user.conf`.
 
-## Checking the files
-
-```
-python3 tools/check_configs.py
-```
-
-The script checks that:
-
-- every tier defines the same options;
-- the presets are valid and go from strongest tier to weakest;
-- frame generation is off for tiers that don't support it;
-- `rgl_config.txt` has no duplicate keys, has cheat mode off, and uses DX7 mode.
-
 ## Changelog
 
 ### Unreleased
@@ -68,7 +55,6 @@ The script checks that:
   RTX 20/30/40/50 = Medium, Intel/AMD = Low.
 - `rgl_config.txt`: set `cheat_mode` to 0 (0.1 turned cheats on for every player)
   and removed a duplicate `enable_blood` line.
-- Added `tools/check_configs.py`.
 
 ### 0.1 Beta
 - Initial release.
